@@ -9,15 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var todoItems = [
+    @State var todoItems = [
         TodoItem(title: "Walk the cat"),
         TodoItem(title: " Feed the cows"),
-        TodoItem(title: "Get scammed")
+        TodoItem(title: "Get scammed", isDone: true)
     ]
     
     var body: some View {
-        List(todoItems) { todoItem in
-            Text(todoItem.title)
+        NavigationView {
+            List(todoItems) { todoItem in
+                HStack {
+                    Image(systemName: todoItem.isDone ? "checkmark.circle.fill" : "circle")
+                    Text(todoItem.title)
+                }
+            }
+            //.navigationBarTitleDisplayMode(.inline)   Makes title small???
+            .navigationTitle("Todos")
+            //.navigationBadHidden(true)    Allows NavigationView without title
         }
     }
 }
